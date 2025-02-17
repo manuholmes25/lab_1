@@ -1,2 +1,7 @@
 # lab_1
-To the newer members
+Group #
+
+Fernando Bueno
+Manuel Mamani
+Belen Medina
+Nelson Ramirez (Encargado)
