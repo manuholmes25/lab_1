@@ -1,0 +1,37 @@
+import RPi.GPIO as GPIO
+import time
+import random
+
+# Pin definitions
+heater_pin = 17  # Red LED (heater)
+fan_pin = 27     # Yellow LED (fan)
+
+# GPIO setup
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(heater_pin, GPIO.OUT)
+GPIO.setup(fan_pin, GPIO.OUT)
+
+try:
+    while True:
+        temperature = random.uniform(5, 25)  # Generate a random temperature between 5 and 25°C
+        print(f"Current Temperature: {temperature:.2f}°C")
+        
+        if temperature < 12:
+            GPIO.output(heater_pin, GPIO.HIGH)  
+            GPIO.output(fan_pin, GPIO.LOW)     
+            print("Heater ON, Fan OFF")
+        elif temperature > 20:
+            GPIO.output(heater_pin, GPIO.LOW)  
+            GPIO.output(fan_pin, GPIO.HIGH)    
+            print("Heater OFF, Fan ON")
+        else:
+            GPIO.output(heater_pin, GPIO.LOW)  
+            GPIO.output(fan_pin, GPIO.LOW)
+            print("Heater OFF, Fan OFF")
+        
+        time.sleep(2)  # Wait for 2 seconds before next reading
+
+except KeyboardInterrupt:
+    print("\n")
+    GPIO.cleanup()  
